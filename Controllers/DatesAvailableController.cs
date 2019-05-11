@@ -40,6 +40,36 @@ namespace DatesAvailableApi.Controllers
             _datesAvailableService.Create(date);
             return CreatedAtRoute("GetDate", new { id = date.Id.ToString() }, date);
         }
+
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Update(string id, DatesAvailable dateIn)
+        {
+            var date = _datesAvailableService.Get(id);
+
+            if(date == null)
+            {
+                return NotFound();
+            }
+
+            _datesAvailableService.Update(id, dateIn);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
+        {
+            var date = _datesAvailableService.Get(id);
+
+            if(date == null)
+            {
+                return NotFound();
+            }
+
+            _datesAvailableService.Remove(date.Id);
+
+            return NoContent();
+        }
     }
 
 }

@@ -32,5 +32,20 @@ namespace DatesAvailableApi.Services
             _dates.InsertOne(date);
             return date;
         }
+
+        public void Update(string id, DatesAvailable dateIn)
+        {
+            _dates.ReplaceOne(date => date.Id ==id, dateIn);
+        }
+
+        public void Remove(DatesAvailable dateIn)
+        {
+            _dates.DeleteOne(date => date.Id == dateIn.Id);
+        }
+
+        public void Remove(string id)
+        {
+            _dates.DeleteOne(date => date.Id == id);
+        }
     }
 }
